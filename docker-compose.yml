@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: "3.9"
+services:
+  node:
+    image: kadlab:latest           # or use "build: ." if you prefer
+    command: ["/app/node", "-bind", ":9999"]
+    environment:
+      - INSTANCE=${HOSTNAME:-node}
+    networks: [kadnet]
+    restart: unless-stopped
+
+networks:
+  kadnet:
+    driver: bridge
